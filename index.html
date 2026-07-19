@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Swell — נפגשים בים, שוחים יחד ונשארים לקפה.">
+  <title>Swell — באים לים?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">לתוכן</a>
+
+  <div class="intro" aria-hidden="true">
+    <div class="intro-mark">
+      <img src="assets/images/swell-logo.png" alt="">
+    </div>
+    <p>See you in the water</p>
+  </div>
+
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Swell, חזרה להתחלה">Swell</a>
+    <a class="header-cta" href="#join">מצטרפים</a>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">ים פתוח. אנשים טובים.</p>
+        <h1>הבוקר שלכם<br><span>יכול להתחיל אחרת.</span></h1>
+      </div>
+      <div class="sun" aria-hidden="true"></div>
+      <div class="hero-logo" aria-hidden="true">
+        <img src="assets/images/swell-logo.png" alt="">
+      </div>
+      <p class="scroll-note">גללו פנימה</p>
+    </section>
+
+    <section class="manifesto section-pad">
+      <p class="section-index">01 / למה</p>
+      <div class="manifesto-grid">
+        <h2>נכנסים לים.<br>יוצאים קצת יותר קרובים.</h2>
+        <div class="body-copy">
+          <p>Swell היא קבוצה של אנשים שפשוט אוהבים את הים ואת מה שקורה סביבו.</p>
+          <p>נפגשים בבוקר, שוחים בקצב שמתאים לכולם, ואז נשארים לקפה. בלי מדידות, בלי פוזה ובלי צורך להכיר מישהו מראש.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="video-story" aria-label="רגע מתוך מפגש של Swell">
+      <div class="video-sticky">
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/images/moment-03.jpg">
+          <source src="assets/video/swell-main.mp4" type="video/mp4">
+        </video>
+        <div class="video-shade"></div>
+        <div class="video-copy">
+          <p>השחייה עוברת מהר.</p>
+          <h2>האנשים נשארים.</h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="rhythm section-pad">
+      <p class="section-index">02 / איך זה עובד</p>
+      <div class="rhythm-list">
+        <article><span>06:30</span><h3>מגיעים לחוף</h3><p>גם לבד זה סבבה. תוך רגע כבר מכירים.</p></article>
+        <article><span>06:45</span><h3>נכנסים יחד</h3><p>קבוצות לפי קצב, ומישהו תמיד שומר שלא נשארים מאחור.</p></article>
+        <article><span>07:30</span><h3>קפה, משהו קטן</h3><p>זה החלק שבו השמות מתחברים לפרצופים.</p></article>
+      </div>
+    </section>
+
+    <section class="moments section-pad">
+      <div class="moments-head">
+        <p class="section-index">03 / רגעים</p>
+        <h2>ככה זה מרגיש.</h2>
+      </div>
+      <div class="moment-grid">
+        <figure class="tall"><img src="assets/images/moment-01.jpg" alt="חברי Swell במפגש ליד הים" loading="lazy"></figure>
+        <figure><img src="assets/images/moment-02.jpg" alt="רגע חברי מתוך מפגש הבוקר" loading="lazy"></figure>
+        <figure><img src="assets/images/moment-03.jpg" alt="שחייה משותפת במים פתוחים" loading="lazy"></figure>
+        <figure class="wide"><img src="assets/images/moment-04.jpg" alt="הקהילה נפגשת אחרי השחייה" loading="lazy"></figure>
+      </div>
+    </section>
+
+    <section class="join" id="join">
+      <div class="join-copy">
+        <p class="section-index">04 / הגל הבא</p>
+        <h2>באים לשחות איתנו?</h2>
+        <p>השאירו פרטים. נשלח את המיקום והזמן של המפגש הבא, וזהו.</p>
+      </div>
+      <form class="join-form" id="joinForm">
+        <label for="name">שם</label>
+        <input id="name" name="name" autocomplete="name" required>
+        <label for="phone">טלפון</label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+        <button type="submit">אני בעניין</button>
+        <p class="form-note" id="formNote" aria-live="polite">לא ספאם. רק המפגש הבא.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer><span>Swell Club</span><span>We swell. We sip. We mingle.</span></footer>
+  <script src="script.js"></script>
+</body>
+</html>
