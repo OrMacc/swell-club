@@ -460,6 +460,8 @@ const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw8DTspSVcByBi
 const joinForm = document.querySelector('#joinForm');
 const joinPanel = document.querySelector('.join-panel');
 const newsletterModal = document.querySelector('#newsletterModal');
+let lastSubmittedName = '';
+let lastSubmittedPhone = '';
 
 function showSuccessState() {
   if (!joinPanel) return;
@@ -519,7 +521,7 @@ if (newsletterForm) {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ name: lastSubmittedName, phone: lastSubmittedPhone, email })
       });
     } catch (err) {}
 
@@ -543,6 +545,9 @@ if (joinForm) {
 
     if (button) button.disabled = true;
     if (buttonText) buttonText.textContent = 'שולח...';
+
+    lastSubmittedName = name;
+    lastSubmittedPhone = phone;
 
     try {
       await fetch(GOOGLE_SHEET_URL, {
