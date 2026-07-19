@@ -458,20 +458,89 @@ if (header) {
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyDOddDLgsx0rACv2Oegcjwe81ZoHu_rJXRVhcgpjpoB4KM3--C6XK2avj7p5zwYCmVMw/exec';
 
 const joinForm = document.querySelector('#joinForm');
+const joinPanel = document.querySelector('.join-panel');
+const newsletterModal = document.querySelector('#newsletterModal');
 
+function showSuccessState() {
+  if (!joinPanel) return;
+  joinPanel.classList.add('is-success');
+
+  const successEl = document.createElement('div');
+  successEl.className = 'join-success';
+  successEl.innerHTML = `
+    <div class="join-success-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 12 10 16 18 8"/>
+      </svg>
+    </div>
+    <p class="join-success-text">נרשמתם לגל הבא.<br>נשלח עדכון לפני המפגש.</p>
+  `;
+  joinPanel.appendChild(successEl);
+
+  // Show newsletter modal after 2.5s
+  setTimeout(openNewsletter, 2500);
+}
+
+function openNewsletter() {
+  if (!newsletterModal) return;
+  newsletterModal.classList.add('is-open');
+  newsletterModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeNewsletter() {
+  if (!newsletterModal) return;
+  newsletterModal.classList.remove('is-open');
+  newsletterModal.setAttribute('aria-hidden', 'true');
+}
+
+// Close modal on backdrop click or X button
+if (newsletterModal) {
+  newsletterModal.querySelector('.newsletter-backdrop')?.addEventListener('click', closeNewsletter);
+  newsletterModal.querySelector('.newsletter-close')?.addEventListener('click', closeNewsletter);
+}
+
+// Newsletter form submission
+const newsletterForm = document.querySelector('#newsletterForm');
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const emailInput = document.querySelector('#newsletterEmail');
+    const email = emailInput.value.trim();
+    const btn = newsletterForm.querySelector('button');
+    const note = document.querySelector('#newsletterNote');
+
+    if (!email) return;
+
+    if (btn) btn.disabled = true;
+    if (btn) btn.textContent = 'שולח...';
+
+    try {
+      await fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+    } catch (err) {}
+
+    if (btn) btn.textContent = 'נרשמתם!';
+    if (note) note.textContent = 'תודה. ניפגש בתיבה.';
+    setTimeout(closeNewsletter, 1500);
+  });
+}
+
+// Main join form
 if (joinForm) {
   joinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const button = e.currentTarget.querySelector('button');
     const buttonText = button?.querySelector('span:first-child');
-    const note = document.querySelector('#formNote');
     const name = document.querySelector('#name').value.trim();
     const phone = document.querySelector('#phone').value.trim();
 
     if (!name || !phone) return;
 
-    // Disable immediately for feedback
     if (button) button.disabled = true;
     if (buttonText) buttonText.textContent = 'שולח...';
 
@@ -482,13 +551,9 @@ if (joinForm) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, phone })
       });
+    } catch (err) {}
 
-      if (buttonText) buttonText.textContent = 'נרשמתם לגל הבא';
-      if (note) note.textContent = 'קיבלנו. נשלח עדכון לפני המפגש הבא.';
-    } catch (err) {
-      if (buttonText) buttonText.textContent = 'נרשמתם לגל הבא';
-      if (note) note.textContent = 'קיבלנו. נשלח עדכון לפני המפגש הבא.';
-    }
+    showSuccessState();
   });
 }
 
