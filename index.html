@@ -1,107 +1,206 @@
 <!doctype html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Swell — נפגשים בים, שוחים יחד ונשארים לקפה.">
-  <title>Swell — באים לים?</title>
+  <meta name="description" content="Swell — בקרים של ים, שחייה וקפה עם אנשים טובים.">
+  <meta name="theme-color" content="#f2f0ea">
+  <title>Swell — הבוקר יכול להתחיל אחרת</title>
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+Hebrew:wght@200;300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">לתוכן</a>
+  <a class="skip-link" href="#main">דילוג לתוכן</a>
 
-  <div class="intro" aria-hidden="true">
-    <div class="intro-mark">
-      <img src="assets/images/swell-logo.png" alt="">
-    </div>
+  <div class="intro" data-intro aria-hidden="true">
+    <div class="intro-logo"><img src="assets/images/swell-logo.png" alt=""></div>
     <p>See you in the water</p>
   </div>
 
-  <header class="site-header">
+  <header class="site-header" data-header>
     <a class="wordmark" href="#top" aria-label="Swell, חזרה להתחלה">Swell</a>
-    <a class="header-cta" href="#join">מצטרפים</a>
+    <p class="header-meta" aria-hidden="true"><span>ים פתוח</span><span>בקרים בתל אביב</span></p>
+    <a class="header-cta" href="#join"><span>להצטרף</span><span aria-hidden="true">↙</span></a>
   </header>
 
   <main id="main">
-    <section class="hero" id="top">
-      <div class="hero-copy">
-        <p class="eyebrow">ים פתוח. אנשים טובים.</p>
-        <h1>הבוקר שלכם<br><span>יכול להתחיל אחרת.</span></h1>
+    <section class="hero" id="top" data-hero data-dark-section>
+      <video class="hero-film" autoplay muted loop playsinline preload="metadata" poster="assets/images/moment-03.jpg">
+        <source src="assets/video/swell-main.mp4" type="video/mp4">
+      </video>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-meta" data-reveal>
+        <span>ים פתוח</span>
+        <span>קבוצה פתוחה</span>
       </div>
-      <div class="sun" aria-hidden="true"></div>
-      <div class="hero-logo" aria-hidden="true">
-        <img src="assets/images/swell-logo.png" alt="">
+
+      <div class="hero-title-wrap">
+        <h1 data-hero-title>
+          <span>הבוקר יכול</span>
+          <span class="hero-title-indent">להתחיל אחרת.</span>
+        </h1>
       </div>
-      <p class="scroll-note">גללו פנימה</p>
+
+      <div class="hero-wave" aria-hidden="true" data-hero-wave>
+        <svg viewBox="0 0 1600 250" preserveAspectRatio="none" role="presentation">
+          <path d="M-30 132C142 40 286 36 455 127c167 90 322 96 487 6 165-90 324-87 488 4 71 39 138 49 209 28" />
+          <path class="wave-secondary" d="M-25 166c172-92 315-96 485-5 166 90 321 91 486 1 166-90 325-88 489 3 71 39 137 46 207 25" />
+        </svg>
+      </div>
+
+      <p class="hero-note" data-reveal>נפגשים מוקדם.<br>נכנסים יחד. נשארים לקפה.</p>
+      <a class="scroll-cue" href="#story" aria-label="המשך לסיפור">
+        <span>לגלול עם הגל</span>
+        <i aria-hidden="true"></i>
+      </a>
     </section>
 
-    <section class="manifesto section-pad">
-      <p class="section-index">01 / למה</p>
-      <div class="manifesto-grid">
-        <h2>נכנסים לים.<br>יוצאים קצת יותר קרובים.</h2>
-        <div class="body-copy">
-          <p>Swell היא קבוצה של אנשים שפשוט אוהבים את הים ואת מה שקורה סביבו.</p>
-          <p>נפגשים בבוקר, שוחים בקצב שמתאים לכולם, ואז נשארים לקפה. בלי מדידות, בלי פוזה ובלי צורך להכיר מישהו מראש.</p>
+    <section class="story" id="story" aria-labelledby="story-title">
+      <div class="section-label" data-reveal><span>01</span><span>זה די פשוט</span></div>
+      <h2 id="story-title" class="sr-only">מה קורה במפגש של Swell</h2>
+
+      <div class="story-intro" data-reveal>
+        <p>לפני המיילים, הפקקים וכל מה שמחכה אחר כך—יש שעה אחת ששייכת רק לים.</p>
+      </div>
+
+      <div class="story-lines">
+        <p class="story-line story-line-a" data-reveal>נפגשים מוקדם,<br><span>לפני שהיום נהיה עמוס.</span></p>
+        <p class="story-line story-line-b" data-reveal>נכנסים יחד.<br><span>כל אחד בקצב שלו.</span></p>
+        <p class="story-line story-line-c" data-reveal>אחרי זה נשארים לקפה.<br><span>שם בדרך כלל מתחיל החלק הטוב.</span></p>
+      </div>
+
+      <p class="story-aside" data-reveal>לא צריך להכיר אף אחד.<br>רק להגיע.</p>
+      <figure class="story-photo" data-reveal>
+        <img src="assets/images/moment-01.jpg" alt="חברי Swell נפגשים ליד הים" loading="lazy">
+        <figcaption><span>Morning, Mediterranean</span><span>01 / 04</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="morning" aria-labelledby="morning-title" data-morning>
+      <h2 id="morning-title" class="sr-only">הבוקר של Swell</h2>
+      <div class="morning-stage">
+        <div class="morning-topline">
+          <div class="section-label section-label-light"><span>02</span><span>בוקר אחד</span></div>
+          <p><span>06:30</span><span>—</span><span>07:30</span></p>
+        </div>
+
+        <div class="sea-drawing" aria-hidden="true">
+          <div class="sea-sun"></div>
+          <div class="sea-horizon"></div>
+          <svg viewBox="0 0 1400 360" preserveAspectRatio="none" role="presentation">
+            <path d="M-70 187c175-94 326-94 502 0 176 94 327 94 503 0 176-94 328-94 503 0"/>
+            <path d="M-70 232c175-94 326-94 502 0 176 94 327 94 503 0 176-94 328-94 503 0"/>
+          </svg>
+          <div class="swimmers">
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+
+        <ol class="morning-steps">
+          <li class="morning-step is-active" data-step="0">
+            <span class="step-time">06:30</span>
+            <div>
+              <h3>מגיעים לחוף.</h3>
+              <p>גם לבד זה לגמרי בסדר.</p>
+            </div>
+          </li>
+          <li class="morning-step" data-step="1">
+            <span class="step-time">06:45</span>
+            <div>
+              <h3>נכנסים יחד.</h3>
+              <p>בקצב שמתאים למפגש.</p>
+            </div>
+          </li>
+          <li class="morning-step" data-step="2">
+            <span class="step-time">07:30</span>
+            <div>
+              <h3>קפה על החול.</h3>
+              <p>עכשיו כבר מכירים.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="step-dots" aria-hidden="true">
+          <i class="is-active"></i><i></i><i></i>
         </div>
       </div>
     </section>
 
-    <section class="video-story" aria-label="רגע מתוך מפגש של Swell">
-      <div class="video-sticky">
-        <video autoplay muted loop playsinline preload="metadata" poster="assets/images/moment-03.jpg">
-          <source src="assets/video/swell-main.mp4" type="video/mp4">
-        </video>
-        <div class="video-shade"></div>
-        <div class="video-copy">
-          <p>השחייה עוברת מהר.</p>
-          <h2>האנשים נשארים.</h2>
-        </div>
+    <section class="film" aria-label="רגע מהמפגש של Swell" data-dark-section>
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/images/moment-02.jpg">
+        <source src="assets/video/swell-main.mp4" type="video/mp4">
+      </video>
+      <div class="film-shade" aria-hidden="true"></div>
+      <div class="film-copy">
+        <div class="section-label section-label-light"><span>03</span><span>בתוך המים</span></div>
+        <p>לא מודדים זמנים.<br>לא מנסים להרשים.</p>
+        <h2>פשוט שוחים.</h2>
       </div>
     </section>
 
-    <section class="rhythm section-pad">
-      <p class="section-index">02 / איך זה עובד</p>
-      <div class="rhythm-list">
-        <article><span>06:30</span><h3>מגיעים לחוף</h3><p>גם לבד זה סבבה. תוך רגע כבר מכירים.</p></article>
-        <article><span>06:45</span><h3>נכנסים יחד</h3><p>קבוצות לפי קצב, ומישהו תמיד שומר שלא נשארים מאחור.</p></article>
-        <article><span>07:30</span><h3>קפה, משהו קטן</h3><p>זה החלק שבו השמות מתחברים לפרצופים.</p></article>
+    <section class="moments" aria-labelledby="moments-title">
+      <div class="moments-heading">
+        <div class="section-label" data-reveal><span>04</span><span>אנשים של ים</span></div>
+        <h2 id="moments-title" data-reveal>באים לבד.<br><span>חוזרים ביחד.</span></h2>
+      </div>
+      <div class="moments-grid">
+        <figure class="moment moment-a" data-reveal>
+          <img src="assets/images/moment-02.jpg" alt="חברים במפגש הבוקר של Swell" loading="lazy">
+          <figcaption>לפני שנכנסים</figcaption>
+        </figure>
+        <figure class="moment moment-b" data-reveal>
+          <img src="assets/images/moment-03.jpg" alt="שחייה משותפת בים" loading="lazy">
+          <figcaption>בתוך הים</figcaption>
+        </figure>
+        <figure class="moment moment-c" data-reveal>
+          <img src="assets/images/moment-04.jpg" alt="הקבוצה נפגשת אחרי השחייה" loading="lazy">
+          <figcaption>אחרי הגל</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="moments section-pad">
-      <div class="moments-head">
-        <p class="section-index">03 / רגעים</p>
-        <h2>ככה זה מרגיש.</h2>
-      </div>
-      <div class="moment-grid">
-        <figure class="tall"><img src="assets/images/moment-01.jpg" alt="חברי Swell במפגש ליד הים" loading="lazy"></figure>
-        <figure><img src="assets/images/moment-02.jpg" alt="רגע חברי מתוך מפגש הבוקר" loading="lazy"></figure>
-        <figure><img src="assets/images/moment-03.jpg" alt="שחייה משותפת במים פתוחים" loading="lazy"></figure>
-        <figure class="wide"><img src="assets/images/moment-04.jpg" alt="הקהילה נפגשת אחרי השחייה" loading="lazy"></figure>
-      </div>
+    <section class="after" data-dark-section>
+      <div class="section-label section-label-light" data-reveal><span>05</span><span>מה שנשאר</span></div>
+      <p class="after-small" data-reveal>הים עושה את שלו.</p>
+      <h2 data-reveal>השחייה נגמרת.<br><span>החיבור נשאר.</span></h2>
+      <p class="after-index" aria-hidden="true">S / 04</p>
     </section>
 
-    <section class="join" id="join">
-      <div class="join-copy">
-        <p class="section-index">04 / הגל הבא</p>
-        <h2>באים לשחות איתנו?</h2>
-        <p>השאירו פרטים. נשלח את המיקום והזמן של המפגש הבא, וזהו.</p>
+    <section class="join" id="join" aria-labelledby="join-title">
+      <div class="join-heading">
+        <div class="section-label" data-reveal><span>06</span><span>הגל הבא</span></div>
+        <h2 id="join-title" data-reveal>ניפגש<br>בגל הבא?</h2>
       </div>
-      <form class="join-form" id="joinForm">
-        <label for="name">שם</label>
-        <input id="name" name="name" autocomplete="name" required>
-        <label for="phone">טלפון</label>
-        <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
-        <button type="submit">אני בעניין</button>
-        <p class="form-note" id="formNote" aria-live="polite">לא ספאם. רק המפגש הבא.</p>
-      </form>
+
+      <div class="join-panel" data-reveal>
+        <p>שם וטלפון, ואנחנו שולחים את המקום והשעה של המפגש הבא.</p>
+        <form class="join-form" id="joinForm">
+          <div class="field">
+            <label for="name">שם</label>
+            <input id="name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="phone">טלפון</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+          </div>
+          <button type="submit"><span>אני רוצה לבוא</span><span aria-hidden="true">↙</span></button>
+          <p class="form-note" id="formNote" aria-live="polite">רק עדכון על המפגש הבא. בלי חפירות.</p>
+        </form>
+      </div>
+
+      <p class="join-english" aria-hidden="true">A new swell is rising.</p>
     </section>
   </main>
 
-  <footer><span>Swell Club</span><span>We swell. We sip. We mingle.</span></footer>
+  <footer>
+    <a class="wordmark" href="#top">Swell</a>
+    <p>ים. אנשים. בוקר.</p>
+    <p class="footer-meta">Swell Club — 2026</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
