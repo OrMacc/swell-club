@@ -352,6 +352,13 @@ svg {
   filter: saturate(0.5) contrast(1.05);
 }
 
+/* Hide native iOS play button */
+.hero-video::-webkit-media-controls-start-playback-button,
+.hero-video::-webkit-media-controls {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
 .hero-video-shade {
   position: absolute;
   inset: 0;

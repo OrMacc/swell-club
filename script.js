@@ -194,6 +194,38 @@ if (document.readyState === 'loading') {
 }
 
 // ============================================================================
+// iOS VIDEO AUTOPLAY FIX
+// ============================================================================
+
+const heroVideo = document.querySelector('.hero-video');
+
+if (heroVideo) {
+  // Force play attempt on load
+  const tryPlay = () => {
+    heroVideo.muted = true;
+    const p = heroVideo.play();
+    if (p && p.catch) {
+      p.catch(() => {
+        // Autoplay blocked — try again on first user interaction
+        const playOnInteraction = () => {
+          heroVideo.play();
+          document.removeEventListener('touchstart', playOnInteraction);
+          document.removeEventListener('scroll', playOnInteraction);
+        };
+        document.addEventListener('touchstart', playOnInteraction, { once: true });
+        document.addEventListener('scroll', playOnInteraction, { once: true });
+      });
+    }
+  };
+
+  if (heroVideo.readyState >= 2) {
+    tryPlay();
+  } else {
+    heroVideo.addEventListener('loadeddata', tryPlay, { once: true });
+  }
+}
+
+// ============================================================================
 // HERO PARALLAX ANIMATIONS
 // ============================================================================
 
