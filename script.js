@@ -219,52 +219,92 @@ if (!reducedMotion) {
 // ============================================================================
 
 if (!reducedMotion) {
-  // Set initial state for all reveal elements
-  gsap.set('[data-reveal]', {
-    opacity: 0,
-    y: 35
+  // Standard data-reveal elements: clip from bottom
+  document.querySelectorAll('[data-reveal]:not(.story-line):not(.story-image):not(.story-full-image)').forEach((el) => {
+    gsap.set(el, {
+      clipPath: 'inset(100% 0 0 0)',
+      y: 40,
+      opacity: 0
+    });
+
+    gsap.to(el, {
+      clipPath: 'inset(0% 0 0 0)',
+      y: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    });
   });
 
-  // Special case: story lines have larger movement
-  gsap.set('.story-line', {
-    opacity: 0,
-    y: 50
+  // Story lines: clip from top, larger movement
+  document.querySelectorAll('.story-line').forEach((line) => {
+    gsap.set(line, {
+      clipPath: 'inset(0 0 100% 0)',
+      y: 50,
+      opacity: 0
+    });
+
+    gsap.to(line, {
+      clipPath: 'inset(0 0 0% 0)',
+      y: 0,
+      opacity: 1,
+      duration: 1.3,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: line,
+        start: 'top 75%',
+        toggleActions: 'play none none none'
+      }
+    });
   });
 
-  // Batch reveal for standard elements
-  ScrollTrigger.batch('[data-reveal]:not(.story-line)', {
-    onEnter: (batch) => {
-      gsap.to(batch, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    },
-    start: 'top 78%'
-  });
+  // Story images: cinematic inset reveal with scale
+  document.querySelectorAll('.story-image, .story-full-image').forEach((fig) => {
+    const img = fig.querySelector('img');
 
-  // Batch reveal for story lines
-  ScrollTrigger.batch('.story-line', {
-    onEnter: (batch) => {
-      gsap.to(batch, {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    },
-    start: 'top 75%'
+    gsap.set(fig, {
+      clipPath: 'inset(8% 8% 8% 8%)',
+      opacity: 0
+    });
+
+    if (img) {
+      gsap.set(img, { scale: 1.15 });
+    }
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: fig,
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    });
+
+    tl.to(fig, {
+      clipPath: 'inset(0% 0% 0% 0%)',
+      opacity: 1,
+      duration: 1.4,
+      ease: 'power3.out'
+    });
+
+    if (img) {
+      tl.to(img, {
+        scale: 1.0,
+        duration: 1.8,
+        ease: 'power2.out'
+      }, 0);
+    }
   });
 } else {
   // Reduced motion: show everything immediately
   gsap.set('[data-reveal], .story-line', {
     opacity: 1,
-    y: 0
+    y: 0,
+    clipPath: 'none'
   });
 }
 
@@ -350,26 +390,40 @@ if (header) {
 // FORM HANDLER
 // ============================================================================
 
+// Google Apps Script endpoint — replace with your deployed URL
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwdf91MyC3o48pJmBdO8U7dtQOotlWUNEXuQ0aFT6S-Bv1HWONxHzuJKXkT1U_px2j5/exec';
+
 const joinForm = document.querySelector('#joinForm');
 
 if (joinForm) {
-  joinForm.addEventListener('submit', (e) => {
+  joinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const button = e.currentTarget.querySelector('button');
     const buttonText = button?.querySelector('span:first-child');
     const note = document.querySelector('#formNote');
+    const name = document.querySelector('#name').value.trim();
+    const phone = document.querySelector('#phone').value.trim();
 
-    if (buttonText) {
-      buttonText.textContent = 'נרשמתם לגל הבא';
-    }
+    if (!name || !phone) return;
 
-    if (button) {
-      button.disabled = true;
-    }
+    // Disable immediately for feedback
+    if (button) button.disabled = true;
+    if (buttonText) buttonText.textContent = 'שולח...';
 
-    if (note) {
-      note.textContent = 'קיבלנו. נשלח עדכון לפני המפגש הבא.';
+    try {
+      await fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone })
+      });
+
+      if (buttonText) buttonText.textContent = 'נרשמתם לגל הבא';
+      if (note) note.textContent = 'קיבלנו. נשלח עדכון לפני המפגש הבא.';
+    } catch (err) {
+      if (buttonText) buttonText.textContent = 'נרשמתם לגל הבא';
+      if (note) note.textContent = 'קיבלנו. נשלח עדכון לפני המפגש הבא.';
     }
   });
 }
