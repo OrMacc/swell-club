@@ -70,13 +70,45 @@ function typeText(element, text, speed, callback) {
   type();
 }
 
+function runBlocksReveal(callback) {
+  const blocks = document.querySelectorAll('.intro-block');
+  if (!blocks.length) {
+    if (callback) callback();
+    return;
+  }
+
+  gsap.to(blocks, {
+    yPercent: -100,
+    duration: 0.8,
+    stagger: 0.1,
+    ease: 'power3.inOut',
+    onComplete: () => {
+      if (introElement) introElement.classList.add('is-done');
+      if (callback) callback();
+    }
+  });
+}
+
 function runIntroSequence() {
+  const hasSeenIntro = localStorage.getItem('swell-intro-seen');
+
   if (reducedMotion) {
     if (introElement) introElement.classList.add('is-done');
+    localStorage.setItem('swell-intro-seen', '1');
     setTimeout(runHeroEntrance, 50);
     return;
   }
 
+  // Returning visitor: just blocks transition
+  if (hasSeenIntro) {
+    if (introElement) introElement.classList.add('is-blocks-only');
+    setTimeout(() => {
+      runBlocksReveal(() => setTimeout(runHeroEntrance, 200));
+    }, 300);
+    return;
+  }
+
+  // First visit: full intro sequence
   // Phase 1: Swell logo animates in (CSS handles this, ~1.2s)
   // Phase 2: After Swell logo settles, show sponsor area and start typing
   setTimeout(() => {
@@ -93,10 +125,10 @@ function runIntroSequence() {
           setTimeout(() => {
             if (sponsorLogo) sponsorLogo.classList.add('is-visible');
 
-            // Hold for a beat, then dismiss intro
+            // Hold for a beat, then dismiss with blocks
             setTimeout(() => {
-              if (introElement) introElement.classList.add('is-done');
-              setTimeout(runHeroEntrance, 500);
+              localStorage.setItem('swell-intro-seen', '1');
+              runBlocksReveal(() => setTimeout(runHeroEntrance, 200));
             }, 1200);
           }, 400);
         }, 600);

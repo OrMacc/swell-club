@@ -160,7 +160,6 @@ svg {
 }
 
 .intro-overlay.is-done {
-  opacity: 0;
   visibility: hidden;
   pointer-events: none;
   display: none;
@@ -237,6 +236,32 @@ svg {
 
 .intro-sponsor-logo.is-visible {
   transform: translateX(0);
+}
+
+.intro-blocks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.intro-block {
+  flex: 1;
+  height: 100%;
+  background: var(--night);
+}
+
+.intro-overlay.is-blocks-only .intro-content {
+  display: none;
+}
+
+.intro-overlay.is-blocks-only .intro-blocks {
+  z-index: 1;
+}
+
+.intro-overlay.is-blocks-only {
+  background: transparent;
 }
 
 /* ============================================================================
