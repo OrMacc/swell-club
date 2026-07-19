@@ -455,7 +455,7 @@ if (header) {
 // ============================================================================
 
 // Google Apps Script endpoint — replace with your deployed URL
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyDOddDLgsx0rACv2Oegcjwe81ZoHu_rJXRVhcgpjpoB4KM3--C6XK2avj7p5zwYCmVMw/exec';
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw8DTspSVcByBiIb8-_PHgRlqQpc93AFb35dHBX4SueUOquha6nuzcYrlsQZHTIhc5wHw/exec';
 
 const joinForm = document.querySelector('#joinForm');
 const joinPanel = document.querySelector('.join-panel');
