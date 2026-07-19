@@ -19,6 +19,10 @@
     <div class="intro-content">
       <p class="intro-wordmark">Swell</p>
       <p class="intro-subtitle">See you in the water</p>
+      <div class="intro-sponsor">
+        <span class="intro-sponsor-text" data-sponsor-text></span>
+        <img class="intro-sponsor-logo" data-sponsor-logo src="assets/images/Speedo-Logo-New.png" alt="Speedo">
+      </div>
     </div>
   </div>
 
@@ -37,6 +41,10 @@
   <main id="main">
 
     <section class="hero" id="top" data-hero data-dark-section>
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/moment-03.jpg">
+        <source src="assets/video/swell-main.mp4" type="video/mp4">
+      </video>
+      <div class="hero-video-shade" aria-hidden="true"></div>
       <div class="hero-deco-circle" aria-hidden="true"></div>
 
       <div class="hero-meta" data-hero-meta>
@@ -85,69 +93,70 @@
 
       <div class="story-lines">
         <p class="story-line" data-reveal>נפגשים מוקדם,<br><span class="story-line-inner">לפני שהיום נהיה עמוס.</span></p>
+
+        <figure class="story-image" data-reveal>
+          <img src="assets/images/moment-01.jpg" alt="חברי Swell נפגשים ליד הים" loading="lazy">
+        </figure>
+
         <p class="story-line story-line-b" data-reveal>נכנסים יחד.<br><span class="story-line-inner">כל אחד בקצב שלו.</span></p>
+
+        <figure class="story-image story-image-b" data-reveal>
+          <img src="assets/images/moment-02.jpg" alt="שחייה משותפת בים" loading="lazy">
+        </figure>
+
         <p class="story-line" data-reveal>אחרי זה נשארים לקפה.<br><span class="story-line-inner">שם בדרך כלל מתחיל החלק הטוב.</span></p>
       </div>
 
       <div class="story-aside" data-reveal>
         <p>לא צריך להכיר אף אחד.<br>רק להגיע.</p>
       </div>
+
+      <figure class="story-full-image" data-reveal>
+        <img src="assets/images/moment-03.jpg" alt="הקבוצה אחרי השחייה" loading="lazy">
+      </figure>
     </section>
 
-    <section class="morning" id="morning" data-morning data-dark-section>
-      <div class="morning-stage">
-        <div class="morning-top-line">
-          <div class="section-label section-label-light">
-            <span class="section-label-num">02</span>
-            <span>בוקר אחד</span>
-          </div>
-          <span class="morning-time-range">06:30 — 07:30</span>
+    <section class="morning" id="morning" data-dark-section>
+      <div class="morning-header">
+        <div class="section-label section-label-light" data-reveal>
+          <span class="section-label-num">02</span>
+          <span>נפגשים בבוקר</span>
         </div>
+        <span class="morning-time-range" data-reveal>06:30 — 07:30</span>
+      </div>
 
-        <div class="sea-drawing" aria-hidden="true">
-          <div class="sea-horizon"></div>
-          <div class="sea-sun"></div>
-          <svg class="sea-waves" viewBox="0 0 1400 200" preserveAspectRatio="none">
-            <path d="M-50,100 C150,60 350,140 550,100 C750,60 950,140 1150,100 C1350,60 1450,120 1450,100" />
-            <path d="M-50,140 C150,100 350,180 550,140 C750,100 950,180 1150,140 C1350,100 1450,160 1450,140" opacity=".4" />
-          </svg>
-          <div class="sea-swimmers">
-            <i class="swimmer-dot"></i>
-            <i class="swimmer-dot"></i>
-            <i class="swimmer-dot"></i>
-            <i class="swimmer-dot"></i>
-            <i class="swimmer-dot"></i>
+      <div class="morning-flow">
+        <div class="morning-card" data-reveal>
+          <div class="morning-card-image">
+            <img src="assets/images/moment-01.jpg" alt="מגיעים לחוף" loading="lazy">
+          </div>
+          <div class="morning-card-text">
+            <span class="morning-card-time">06:30</span>
+            <h3>מגיעים לחוף.</h3>
+            <p>גם לבד זה לגמרי בסדר.</p>
           </div>
         </div>
 
-        <div class="morning-steps">
-          <div class="morning-step is-active" data-step="0">
-            <span class="morning-step-time">06:30</span>
-            <div class="morning-step-content">
-              <h3>מגיעים לחוף.</h3>
-              <p>גם לבד זה לגמרי בסדר.</p>
-            </div>
+        <div class="morning-card morning-card-flip" data-reveal>
+          <div class="morning-card-text">
+            <span class="morning-card-time">06:45</span>
+            <h3>נכנסים יחד.</h3>
+            <p>בקצב שמתאים למפגש.</p>
           </div>
-          <div class="morning-step" data-step="1">
-            <span class="morning-step-time">06:45</span>
-            <div class="morning-step-content">
-              <h3>נכנסים יחד.</h3>
-              <p>בקצב שמתאים למפגש.</p>
-            </div>
-          </div>
-          <div class="morning-step" data-step="2">
-            <span class="morning-step-time">07:30</span>
-            <div class="morning-step-content">
-              <h3>קפה על החול.</h3>
-              <p>עכשיו כבר מכירים.</p>
-            </div>
+          <div class="morning-card-image">
+            <img src="assets/images/moment-02.jpg" alt="שחייה משותפת" loading="lazy">
           </div>
         </div>
 
-        <div class="morning-step-dots" aria-hidden="true">
-          <i class="step-dot is-active"></i>
-          <i class="step-dot"></i>
-          <i class="step-dot"></i>
+        <div class="morning-card" data-reveal>
+          <div class="morning-card-image">
+            <img src="assets/images/moment-04.jpg" alt="קפה על החול" loading="lazy">
+          </div>
+          <div class="morning-card-text">
+            <span class="morning-card-time">07:30</span>
+            <h3>קפה על החול.</h3>
+            <p>עכשיו כבר מכירים.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -155,7 +164,7 @@
     <section class="quiet" id="quiet" data-dark-section>
       <div class="section-label section-label-light" data-reveal>
         <span class="section-label-num">03</span>
-        <span>מה שנשאר</span>
+        <span>מתחילים את היום באנרגיות</span>
       </div>
       <p class="quiet-small" data-reveal>הים עושה את שלו.</p>
       <h2 class="quiet-heading" data-reveal>
@@ -172,7 +181,7 @@
             <span class="section-label-num">04</span>
             <span>הגל הבא</span>
           </div>
-          <h2 class="join-heading" data-reveal>ניפגש<br>בגל הבא?</h2>
+          <h2 class="join-heading" data-reveal>ניפגש<br>שבוע הבא?</h2>
         </div>
       </div>
 

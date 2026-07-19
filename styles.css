@@ -60,6 +60,7 @@
 html {
   scroll-behavior: smooth;
   background: var(--canvas);
+  overflow-x: hidden;
 }
 
 body {
@@ -91,6 +92,19 @@ svg {
 ::selection {
   background: var(--foam);
   color: var(--ink);
+}
+
+/* Subtle grain texture for depth in dark sections */
+.hero::after,
+.morning::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.018;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 1;
 }
 
 /* ============================================================================
@@ -149,6 +163,7 @@ svg {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  display: none;
 }
 
 .intro-wordmark {
@@ -183,6 +198,45 @@ svg {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   opacity: 0.6;
+}
+
+.intro-sponsor {
+  position: absolute;
+  bottom: clamp(5rem, 12vh, 8rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+}
+
+.intro-sponsor.is-visible {
+  opacity: 1;
+}
+
+.intro-sponsor-text {
+  font-family: Inter, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: var(--foam);
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.intro-sponsor-logo {
+  height: 1.6rem;
+  width: auto;
+  filter: invert(1);
+  opacity: 0.85;
+  transform: translateX(120vw);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.intro-sponsor-logo.is-visible {
+  transform: translateX(0);
 }
 
 /* ============================================================================
@@ -261,6 +315,53 @@ svg {
   color: var(--foam);
 }
 
+/* Video background */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: saturate(0.5) contrast(1.05);
+}
+
+.hero-video-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, hsl(202 40% 8% / .55) 0%, hsl(202 40% 8% / .25) 40%, hsl(202 40% 8% / .5) 100%),
+    linear-gradient(90deg, hsl(202 40% 8% / .3) 0%, transparent 60%);
+}
+
+/* Animated aurora gradient mesh background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, hsl(200 40% 18% / .6), transparent),
+    radial-gradient(ellipse 60% 80% at 80% 60%, hsl(210 35% 15% / .5), transparent),
+    radial-gradient(ellipse 50% 50% at 50% 80%, hsl(190 30% 12% / .4), transparent);
+  animation: auroraShift 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes auroraShift {
+  0% {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    background-position: 30% 20%, 70% 40%, 40% 70%;
+    opacity: 0.8;
+  }
+}
+
 .hero-deco-circle {
   position: absolute;
   bottom: -15vw;
@@ -269,12 +370,13 @@ svg {
   height: 45vw;
   border: 1px solid currentColor;
   border-radius: 50%;
-  opacity: 0.06;
+  opacity: 0.04;
   pointer-events: none;
 }
 
 .hero-meta {
   position: absolute;
+  z-index: 3;
   top: clamp(6rem, 10vh, 8rem);
   left: var(--side);
   right: var(--side);
@@ -288,7 +390,7 @@ svg {
 .hero-title-wrap {
   position: absolute;
   z-index: 2;
-  top: 48%;
+  top: 28%;
   left: var(--side);
   right: var(--side);
   transform: translateY(-50%);
@@ -298,9 +400,9 @@ svg {
   display: flex;
   flex-direction: column;
   gap: clamp(0.5rem, 1vw, 1rem);
-  font-size: var(--text-hero);
+  font-size: clamp(3rem, 7vw, 7.5rem);
   font-weight: 300;
-  line-height: 0.92;
+  line-height: 0.95;
   letter-spacing: -0.04em;
 }
 
@@ -311,12 +413,13 @@ svg {
 
 .hero-wave-wrap {
   position: absolute;
-  top: 54%;
+  bottom: clamp(5rem, 10vh, 8rem);
   right: -3vw;
   left: -3vw;
-  height: clamp(4rem, 8vw, 8rem);
+  height: clamp(3rem, 6vw, 5rem);
   overflow: visible;
   pointer-events: none;
+  opacity: 0.5;
 }
 
 .hero-wave {
@@ -339,6 +442,7 @@ svg {
 
 .hero-note {
   position: absolute;
+  z-index: 3;
   bottom: clamp(2rem, 5vh, 4rem);
   right: var(--side);
   max-width: 18rem;
@@ -350,6 +454,7 @@ svg {
 
 .hero-scroll-cue {
   position: absolute;
+  z-index: 3;
   bottom: clamp(2rem, 5vh, 4rem);
   left: var(--side);
   display: flex;
@@ -413,8 +518,7 @@ svg {
 
 .manifesto {
   position: relative;
-  min-height: 160svh;
-  padding-top: clamp(10rem, 18vh, 14rem);
+  padding-top: clamp(8rem, 14vh, 12rem);
   padding-bottom: var(--section-gap);
   background: var(--canvas-alt);
 }
@@ -440,7 +544,7 @@ svg {
 
 .story-lines {
   display: grid;
-  gap: clamp(18vh, 20vh, 22vh);
+  gap: clamp(6rem, 10vh, 10rem);
   padding: 0 var(--side);
 }
 
@@ -460,6 +564,42 @@ svg {
   justify-self: end;
 }
 
+.story-image {
+  margin: 0;
+  width: min(55%, 28rem);
+  overflow: hidden;
+}
+
+.story-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: saturate(0.6);
+  transition: transform 0.8s var(--ease);
+}
+
+.story-image:hover img {
+  transform: scale(1.02);
+}
+
+.story-image-b {
+  justify-self: end;
+}
+
+.story-full-image {
+  margin: clamp(4rem, 8vh, 8rem) calc(var(--side) * -1) 0;
+  overflow: hidden;
+}
+
+.story-full-image img {
+  display: block;
+  width: 100%;
+  height: clamp(30vh, 45vh, 50vh);
+  object-fit: cover;
+  filter: saturate(0.55) contrast(1.02);
+}
+
 .story-aside {
   margin-top: clamp(8rem, 12vh, 10rem);
   padding: 0 var(--side);
@@ -468,173 +608,113 @@ svg {
   line-height: 1.6;
 }
 
+/* (moments section removed — images now inline in manifesto) */
+
 /* ============================================================================
-   Morning Section (Sticky Scene)
+   Morning Section (Visual Timeline)
    ========================================================================== */
 
 .morning {
   position: relative;
-  height: 300svh;
   color: var(--foam);
   background: var(--night);
-}
-
-.morning-stage {
-  position: sticky;
-  top: 0;
-  height: 100svh;
+  padding: clamp(5rem, 8vw, 8rem) 0;
   overflow: hidden;
-  background:
-    radial-gradient(
-      ellipse at 50% calc(40% + var(--scene-progress, 0) * 10%),
-      hsl(200 30% 15% / 0.4) 0%,
-      hsl(202 40% 10%) 50%
-    );
 }
 
-.morning-top-line {
+.morning-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem var(--side);
-  border-bottom: 1px solid hsl(42 28% 95% / .06);
+  padding: 0 var(--side) var(--space-md);
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+  border-bottom: 1px solid hsl(42 28% 95% / .1);
 }
 
 .morning-time-range {
+  direction: ltr;
+  font-family: Inter, sans-serif;
   font-size: var(--text-small);
   font-weight: 400;
+  font-variant-numeric: tabular-nums;
   opacity: 0.6;
 }
 
-.sea-drawing {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.sea-horizon {
-  position: absolute;
-  top: 45%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.12;
-}
-
-.sea-sun {
-  position: absolute;
-  top: calc(35% - var(--scene-progress, 0) * 8%);
-  left: calc(50% + var(--scene-progress, 0) * 15%);
-  width: clamp(4rem, 6vw, 7rem);
-  height: clamp(4rem, 6vw, 7rem);
-  border: 1px solid hsl(35 60% 65%);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  opacity: calc(0.3 + var(--scene-progress, 0) * 0.5);
-}
-
-.sea-waves {
-  position: absolute;
-  bottom: 25%;
-  left: 0;
-  right: 0;
-  height: 30%;
-  opacity: 0.4;
-}
-
-.sea-waves path {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-.sea-swimmers {
-  position: absolute;
-  top: 52%;
-  left: 50%;
-  display: flex;
-  gap: 1.2rem;
-  transform: translateX(calc(-50% + var(--scene-progress, 0) * 8rem));
-  opacity: calc(var(--scene-progress, 0) * 1.2);
-}
-
-.swimmer-dot {
-  width: 0.32rem;
-  height: 0.32rem;
-  background: currentColor;
-  border-radius: 50%;
-}
-
-.morning-steps {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.morning-step {
-  position: absolute;
-  bottom: clamp(3rem, 8vh, 6rem);
-  left: var(--side);
-  right: var(--side);
+/* Card-based timeline flow */
+.morning-flow {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: clamp(2rem, 4vw, 4rem);
-  opacity: 0;
-  transform: translateY(2rem);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  gap: 1px;
 }
 
-.morning-step.is-active {
-  opacity: 1;
-  transform: translateY(0);
+.morning-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: clamp(20rem, 50vh, 36rem);
 }
 
-.morning-step-time {
+/* Alternate image side: odd cards = image right (start in RTL), even = image left */
+.morning-card:nth-child(even) {
+  direction: ltr;
+}
+
+.morning-card:nth-child(even) .morning-card-text {
+  direction: rtl;
+}
+
+.morning-card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.morning-card-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.5);
+  transition: transform 1s var(--ease), filter 0.6s ease;
+}
+
+.morning-card:hover .morning-card-image img {
+  transform: scale(1.04);
+  filter: saturate(0.7);
+}
+
+.morning-card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 5vw, 5rem);
+}
+
+.morning-card-time {
+  display: block;
+  margin-bottom: var(--space-md);
+  direction: ltr;
+  width: fit-content;
   font-family: Inter, sans-serif;
-  font-size: var(--text-small);
+  font-size: var(--text-micro);
+  font-weight: 400;
   font-variant-numeric: tabular-nums;
-  opacity: 0.5;
-  padding-top: 0.5rem;
+  letter-spacing: 0.05em;
+  opacity: 0.45;
 }
 
-.morning-step-content h3 {
-  margin: 0 0 1rem 0;
+.morning-card-text h3 {
+  margin: 0 0 var(--space-sm) 0;
   font-size: var(--text-display);
   font-weight: 300;
-  line-height: 0.94;
+  line-height: 0.95;
   letter-spacing: -0.035em;
 }
 
-.morning-step-content p {
+.morning-card-text p {
   margin: 0;
-  max-width: 32rem;
-  font-size: var(--text-small);
-  line-height: 1.6;
-  opacity: 0.66;
-}
-
-.morning-step-dots {
-  position: absolute;
-  bottom: clamp(1.5rem, 4vh, 3rem);
-  right: var(--side);
-  display: flex;
-  gap: 0.5rem;
-}
-
-.step-dot {
-  width: 1.5rem;
-  height: 2px;
-  background: currentColor;
-  opacity: 0.2;
-  transition: width 0.4s var(--ease), opacity 0.4s var(--ease);
-}
-
-.step-dot.is-active {
-  width: 3rem;
-  opacity: 1;
+  max-width: 24rem;
+  font-size: var(--text-body);
+  line-height: 1.65;
+  opacity: 0.55;
 }
 
 /* ============================================================================
@@ -652,6 +732,23 @@ svg {
   background: var(--night);
   color: var(--foam);
   text-align: center;
+  overflow: hidden;
+}
+
+.quiet::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 50%, hsl(200 30% 16% / .35), transparent),
+    radial-gradient(ellipse 40% 60% at 30% 70%, hsl(195 20% 13% / .25), transparent);
+  animation: quietGlow 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes quietGlow {
+  0% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.05); }
 }
 
 .quiet .section-label {
@@ -943,12 +1040,13 @@ svg {
   }
 
   .hero-title-wrap {
-    top: 45%;
+    top: 22%;
+    transform: none;
   }
 
   .hero-title {
-    font-size: clamp(2.8rem, 13vw, 4.2rem);
-    gap: 0.3rem;
+    font-size: clamp(2.2rem, 9vw, 3rem);
+    gap: 0.5rem;
   }
 
   .hero-title-line-2 {
@@ -957,8 +1055,8 @@ svg {
   }
 
   .hero-wave-wrap {
-    top: 48%;
-    opacity: 0.4;
+    bottom: 4rem;
+    opacity: 0.35;
   }
 
   .hero-note {
@@ -1000,7 +1098,7 @@ svg {
   }
 
   .story-lines {
-    gap: 8vh;
+    gap: 4rem;
   }
 
   .story-line {
@@ -1011,44 +1109,46 @@ svg {
     justify-self: start;
   }
 
+  .story-image,
+  .story-image-b {
+    width: 85%;
+    justify-self: start;
+  }
+
+  .story-image-b {
+    justify-self: end;
+  }
+
   /* Morning */
   .morning {
-    height: auto;
+    padding: clamp(4rem, 8vw, 6rem) 0;
   }
 
-  .morning-stage {
-    position: static;
-    height: auto;
-    min-height: 60vh;
+  .morning-header {
+    padding-left: var(--side);
+    padding-right: var(--side);
   }
 
-  .morning-steps {
-    position: static;
-    padding: 3rem var(--side);
+  .morning-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
   }
 
-  .morning-step {
-    position: static;
-    opacity: 1;
-    transform: none;
-    padding: 3rem 0;
-    border-bottom: 1px solid hsl(42 28% 95% / .1);
+  .morning-card:nth-child(even) {
+    direction: rtl;
   }
 
-  .morning-step:last-child {
-    border-bottom: none;
+  .morning-card-image {
+    position: relative;
+    height: 50vw;
   }
 
-  .morning-step-content h3 {
+  .morning-card-text {
+    padding: var(--space-lg) var(--side);
+  }
+
+  .morning-card-text h3 {
     font-size: var(--text-subhead);
-  }
-
-  .morning-step-dots {
-    display: none;
-  }
-
-  .sea-drawing {
-    opacity: 0.3;
   }
 
   /* Quiet */
@@ -1117,23 +1217,4 @@ svg {
     transform: none;
   }
 
-  .morning {
-    height: auto;
-  }
-
-  .morning-stage {
-    position: static;
-    height: auto;
-  }
-
-  .morning-steps {
-    position: static;
-  }
-
-  .morning-step {
-    position: static;
-    opacity: 1;
-    transform: none;
-    margin-bottom: 3rem;
-  }
 }

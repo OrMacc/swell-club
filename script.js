@@ -52,20 +52,57 @@ gsap.registerPlugin(ScrollTrigger);
 // ============================================================================
 
 const introElement = document.querySelector('[data-intro]');
+const sponsorText = document.querySelector('[data-sponsor-text]');
+const sponsorLogo = document.querySelector('[data-sponsor-logo]');
+const sponsorWrap = document.querySelector('.intro-sponsor');
+
+function typeText(element, text, speed, callback) {
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    } else if (callback) {
+      callback();
+    }
+  }
+  type();
+}
 
 function runIntroSequence() {
-  const introDelay = reducedMotion ? 50 : 1600;
+  if (reducedMotion) {
+    if (introElement) introElement.classList.add('is-done');
+    setTimeout(runHeroEntrance, 50);
+    return;
+  }
 
+  // Phase 1: Swell logo animates in (CSS handles this, ~1.2s)
+  // Phase 2: After Swell logo settles, show sponsor area and start typing
   setTimeout(() => {
-    if (introElement) {
-      introElement.classList.add('is-done');
-    }
+    if (sponsorWrap) sponsorWrap.classList.add('is-visible');
 
-    // After intro fades, trigger hero entrance
-    setTimeout(() => {
-      runHeroEntrance();
-    }, 400);
-  }, introDelay);
+    // Start typing "sponsored by"
+    if (sponsorText) {
+      typeText(sponsorText, 'sponsored by', 65, () => {
+        // After typing finishes, pause then add the "."
+        setTimeout(() => {
+          sponsorText.textContent += '.';
+
+          // After the dot, slide in Speedo logo from right
+          setTimeout(() => {
+            if (sponsorLogo) sponsorLogo.classList.add('is-visible');
+
+            // Hold for a beat, then dismiss intro
+            setTimeout(() => {
+              if (introElement) introElement.classList.add('is-done');
+              setTimeout(runHeroEntrance, 500);
+            }, 1200);
+          }, 400);
+        }, 600);
+      });
+    }
+  }, 1500);
 }
 
 function runHeroEntrance() {
@@ -254,93 +291,8 @@ if (!reducedMotion) {
 }
 
 // ============================================================================
-// MORNING STICKY SCENE
+// MORNING SECTION (no sticky — handled by general reveal system)
 // ============================================================================
-
-if (isDesktop && !reducedMotion) {
-  const morningSection = document.querySelector('[data-morning]');
-  const morningStage = morningSection?.querySelector('.morning-stage');
-  const steps = document.querySelectorAll('[data-step]');
-  const stepDots = document.querySelectorAll('.morning-step-dots i');
-
-  if (morningSection && morningStage && steps.length) {
-    // Pin the stage while scrolling through the section
-    ScrollTrigger.create({
-      trigger: morningSection,
-      start: 'top top',
-      end: 'bottom bottom',
-      pin: morningStage,
-      pinSpacing: false
-    });
-
-    // Update scene progress and active step
-    ScrollTrigger.create({
-      trigger: morningSection,
-      start: 'top top',
-      end: 'bottom bottom',
-      onUpdate: (self) => {
-        const progress = self.progress;
-
-        // Update CSS variable for any CSS-driven animations
-        morningStage.style.setProperty('--scene-progress', progress.toFixed(3));
-
-        // Determine active step (0, 1, or 2)
-        const activeStep = Math.min(2, Math.floor(progress * 3));
-
-        // Toggle active classes on steps
-        steps.forEach((step, i) => {
-          step.classList.toggle('is-active', i === activeStep);
-        });
-
-        // Toggle active classes on dots
-        stepDots.forEach((dot, i) => {
-          dot.classList.toggle('is-active', i === activeStep);
-        });
-      }
-    });
-
-    // Optional: animate step transitions with GSAP
-    steps.forEach((step, index) => {
-      const startProgress = index / 3;
-      const endProgress = (index + 1) / 3;
-
-      ScrollTrigger.create({
-        trigger: morningSection,
-        start: 'top top',
-        end: 'bottom bottom',
-        onUpdate: (self) => {
-          const progress = self.progress;
-
-          if (progress >= startProgress && progress < endProgress) {
-            // This step is active
-            gsap.to(step, {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              ease: 'power2.out'
-            });
-          } else if (progress < startProgress) {
-            // This step is in the future
-            gsap.to(step, {
-              opacity: 0,
-              y: 20,
-              duration: 0.4,
-              ease: 'power2.in'
-            });
-          } else {
-            // This step is in the past
-            gsap.to(step, {
-              opacity: 0,
-              y: -20,
-              duration: 0.4,
-              ease: 'power2.in'
-            });
-          }
-        }
-      });
-    });
-  }
-}
 
 // ============================================================================
 // HEADER BEHAVIOR
@@ -350,7 +302,7 @@ const header = document.querySelector('[data-header]');
 
 if (header) {
   // Dark mode: toggle based on overlapping dark sections
-  const darkSections = document.querySelectorAll('[data-dark-section], [data-morning]');
+  const darkSections = document.querySelectorAll('[data-dark-section]');
 
   darkSections.forEach((section) => {
     ScrollTrigger.create({

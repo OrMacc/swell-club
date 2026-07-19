@@ -1,0 +1,95 @@
+- generic [active] [ref=e1]:
+  - link "דלג לתוכן הראשי":
+    - /url: "#main"
+  - generic [ref=e3]:
+    - paragraph [ref=e4]: Swell
+    - paragraph [ref=e5]: See you in the water
+  - banner [ref=e8]:
+    - generic [ref=e9]: Swell
+    - generic [ref=e10]:
+      - generic [ref=e11]: ים פתוח
+      - generic [ref=e12]: בקרים בתל אביב
+    - link "להצטרף ↙" [ref=e13] [cursor=pointer]:
+      - /url: "#join"
+      - generic [ref=e14]: להצטרף
+      - generic [ref=e15]: ↙
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e20]:
+        - generic [ref=e21]: ים פתוח
+        - generic [ref=e22]: קבוצה פתוחה
+      - heading "הבוקר יכול להתחיל אחרת." [level=1] [ref=e24]:
+        - generic [ref=e25]: הבוקר יכול
+        - generic [ref=e26]: להתחיל אחרת.
+      - paragraph [ref=e28]: נפגשים מוקדם.נכנסים יחד. נשארים לקפה.
+      - generic [ref=e29]: לגלול עם הגל
+    - generic [ref=e34]:
+      - generic [ref=e36]:
+        - generic [ref=e37]: "01"
+        - generic [ref=e38]: זה די פשוט
+      - paragraph [ref=e40]: לפני המיילים, הפקקים וכל מה שמחכה אחר כך—יש שעה אחת ששייכת רק לים.
+      - generic [ref=e41]:
+        - paragraph [ref=e42]: נפגשים מוקדם,לפני שהיום נהיה עמוס.
+        - figure [ref=e43]:
+          - img "חברי Swell נפגשים ליד הים" [ref=e44]
+        - paragraph [ref=e45]: נכנסים יחד.כל אחד בקצב שלו.
+        - figure [ref=e46]:
+          - img "שחייה משותפת בים" [ref=e47]
+        - paragraph [ref=e48]: אחרי זה נשארים לקפה.שם בדרך כלל מתחיל החלק הטוב.
+      - paragraph [ref=e50]: לא צריך להכיר אף אחד.רק להגיע.
+      - figure [ref=e51]:
+        - img "הקבוצה אחרי השחייה" [ref=e52]
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - generic [ref=e58]: "02"
+          - generic [ref=e59]: נפגשים בבוקר
+        - generic [ref=e60]: 06:30 — 07:30
+      - generic:
+        - generic:
+          - generic: 06:30
+          - generic:
+            - heading "מגיעים לחוף." [level=3]
+            - paragraph: גם לבד זה לגמרי בסדר.
+        - generic:
+          - generic: 06:45
+          - generic:
+            - heading "נכנסים יחד." [level=3]
+            - paragraph: בקצב שמתאים למפגש.
+        - generic:
+          - generic: 07:30
+          - generic:
+            - heading "קפה על החול." [level=3]
+            - paragraph: עכשיו כבר מכירים.
+    - generic [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e67]: "03"
+        - generic [ref=e68]: מתחילים את היום באנרגיות
+      - paragraph [ref=e69]: הים עושה את שלו.
+      - heading "השחייה נגמרת. החיבור נשאר." [level=2] [ref=e70]:
+        - text: השחייה נגמרת.
+        - generic [ref=e71]: החיבור נשאר.
+      - paragraph [ref=e72]: S / 03
+    - generic [ref=e73]:
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e77]: "04"
+          - generic [ref=e78]: הגל הבא
+        - heading "ניפגש שבוע הבא?" [level=2] [ref=e79]: ניפגששבוע הבא?
+      - generic [ref=e80]:
+        - paragraph [ref=e81]: שם וטלפון, ואנחנו שולחים את המקום והשעה של המפגש הבא.
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: שם
+            - textbox "שם" [ref=e85]
+          - generic [ref=e86]:
+            - generic [ref=e87]: טלפון
+            - textbox "טלפון" [ref=e88]
+          - button "אני רוצה לבוא" [ref=e89] [cursor=pointer]:
+            - generic [ref=e91]: ↙
+        - paragraph [ref=e92]: רק עדכון על המפגש הבא. בלי חפירות.
+      - paragraph [ref=e93]: A new swell is rising.
+  - contentinfo [ref=e94]:
+    - generic [ref=e95]: Swell
+    - generic [ref=e96]: ים. אנשים. בוקר.
+    - generic [ref=e97]: Swell Club — 2026
